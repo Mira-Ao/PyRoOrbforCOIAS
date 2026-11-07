@@ -1,6 +1,7 @@
 # PyRoOrbforCOIAS
 
-PyRoOrbを導入したうえで、これをCOIASユーザーが手軽に動かせるようにするための自作スクリプト群。
+P.VanwylanさんのPyRoOrb　https://github.com/petervanwylen/PyRoOrb
+を導入したうえで、これをCOIASユーザーが手軽に動かせるようにするための自作スクリプト群。
 
 PyRoOrbディレクトリ内、PyRoOrb直下にscripts、dataフォルダを作り、
 data 内に更にinput,outputフォルダを作っておく想定。
@@ -12,7 +13,7 @@ input内にitf.txt を保存しておく。
 ただしitfを更新したらもう一度勝手に構築し直しを始める。
 
 ＊仮符号リストから検索
-dkbkさんの　https://github.com/dkbk/misc_coias　
+dkbkさんの　https://github.com/dkbk/misc_coias
 で作ったCOIASastファイルの仮符号をdesignaton.txtとしておくと、その中に書き込まれた仮符号天体を上から順にITFサーチしてDES-ITFを探してくれる。仮符号リストは圧縮だろうが非圧縮だろうが、ほかに余計な文字列が入っていようがそのまま使用可能。
 ./.venv/bin/python scripts/search_designation_list.py \
     --itf data/input/itf.txt \
@@ -21,7 +22,7 @@ dkbkさんの　https://github.com/dkbk/misc_coias　
 ちなみに仮符号天体の観測はそのつどMPCにAPIで勝手に取ってきてくれるので、ITFと違い事前の手動ダウンロード不要。
 
 ＊heliolincかtracklet-listから検索
-https://github.com/Mira-Ao/heliolincforCOIAS　
+https://github.com/Mira-Ao/heliolincforCOIAS
 で作ったheliolincで同一天体判定を受けたトラックレット群について、追加のITFサーチを行うのが--cluster-file。
 または2夜存在するパーソナル符号名を列挙したり、H000000 = H000001 のようにペアで結び付けたトラックレットも1群としてITFサーチを行えるのが--tracklet-list。
 つまりトラックレット群をあたかも1つの仮符号天体のように扱ってDES-ITFっぽいことができる。（もちろん実際はITF-ITF）
@@ -53,11 +54,13 @@ heliolincの出力ファイルを1か所（heliolinc_clusters）に集めて動�
 出力されるlinkageファイルのメアドと名前をデフォルトで入力するには、PyRorb > src > pyroorb > itf >config.py の1594行目あたりの
 
 submit_email: str = field(default_factory=lambda: _env("ITF_SUBMIT_EMAIL", ""))
+
 submit_name: str = field(default_factory=lambda: _env("ITF_SUBMIT_NAME", ""))
 
 を
 
 submit_email: str = field(default_factory=lambda: _env("ITF_SUBMIT_EMAIL", "your@email.com"))
+
 submit_name: str = field(default_factory=lambda: _env("ITF_SUBMIT_NAME", "A. Manaka"))
 
 とかに変えます。
